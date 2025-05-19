@@ -172,3 +172,18 @@ document.getElementById('signup-link').addEventListener('click', (e) => {
     e.preventDefault();
     openModal('signup');
 });
+const allowedOrigins = [
+    'https://static-183g.onrender.com',
+    'http://localhost:8080' // Keep for local development
+];
+
+app.use(cors({
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true
+}));
